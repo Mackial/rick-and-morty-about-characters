@@ -1,4 +1,7 @@
+# Es el nombre con el que aparecera en la lista de actions en el repositorio
 name: learn-github-actions
+# Especifica el evento que desencadena este workflow
+# En ete caso
 on: [push]
 jobs:
   check-bats-version:

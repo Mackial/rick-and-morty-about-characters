@@ -1,0 +1,15 @@
+# Es el nombre con el que aparecera en la lista de actions en el repositorio
+# name: learn-github-actions
+# Especifica el evento que desencadena este workflow
+# En ete caso
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - run: npm install -g bats
+      - run: bats -v
