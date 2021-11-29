@@ -1,15 +1,27 @@
 # Es el nombre con el que aparecera en la lista de actions en el repositorio
 name: learn-github-actions
 # Especifica el evento que desencadena este workflow
-# En ete caso
-on: [push]
+# Puede ser una cadena, un lista o la programcaion de un evento
+on: push
+# Agrupa los jobs
 jobs:
+  # Nombre del job
   check-bats-version:
+    # Indica en que OS hospedado en github se ejecutara
     runs-on: ubuntu-latest
+    # Agrupa todos los pasos que se ejecutara
+    # Cada uno de los elementos anidados a este son comandos de shell separados
     steps:
+      # Indica que que use la v2 de la accion comunitaria
+      # Esta accion revisa y descarga el repo a la maquina virtual
       - uses: actions/checkout@v2
+      # Este paso prepara el entorno de node con la version especifica que requiere el proyecto
+      # El cual otorga acceso al comando npm
       - uses: actions/setup-node@v2
         with:
           node-version: "14"
+        # Le dice al ejecutor (maquina virtual) que ejecute un comando de shell.
+        # En este caso se esta instalando el paquete bat de forma globla
       - run: npm install -g bats
+        # Este ultimo comando esta ejecutando el paquete anteriormente instalado e indicando cual version es con el parametro -v
       - run: bats -v
